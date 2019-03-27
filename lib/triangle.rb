@@ -17,7 +17,7 @@ end
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  
+
   	if ([a,b,c].min <= 0)
   		raise TriangleError
 	end
@@ -28,11 +28,11 @@ def triangle(a, b, c)
 
   if (a == b) && (b == c)
 	return :equilateral
-  end 
+  end
   if (a == b) || (b == c) || (a == c) || (b == c)
 	return :isosceles
   else
-  	return :scalene	
+  	return :scalene
   end
 
 end
