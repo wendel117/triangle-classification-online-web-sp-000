@@ -1,3 +1,9 @@
+class TriangleError < StandardError
+  def message
+    "Action Bronson, No matter what, you're going to get a comparison to something. I Gave You A Grace Period, but that SportsNation triangular mentioning of my name was an ERROR!"
+  end
+end
+
 class Triangle
 	attr_accessor :side1, :side2, :side3
 
