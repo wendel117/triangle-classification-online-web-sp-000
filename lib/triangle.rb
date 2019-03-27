@@ -1,42 +1,57 @@
 class TriangleError < StandardError
-end
-
-# Triangle Project Code.
-
-# Triangle analyzes the lengths of the sides of a triangle
-# (represented by a, b and c) and returns the type of triangle.
-#
-# It returns:
-#   :equilateral  if all sides are equal
-#   :isosceles    if exactly 2 sides are equal
-#   :scalene      if no sides are equal
-#
-# The tests for this method can be found in
-#   about_triangle_project.rb
-# and
-#   about_triangle_project_2.rb
-#
-def triangle(a, b, c)
-
-  	if ([a,b,c].min <= 0)
-  		raise TriangleError
-	end
-	temp = [a,b,c].sort
-	if temp[0] + temp[1] <= temp[2]
-		raise TriangleError
-	end
-
-  if (a == b) && (b == c)
-	return :equilateral
+  def message
+    "Action Bronson, No matter what, you're going to get a comparison to something. I Gave You A Grace Period, but that SportsNation triangular mentioning of my name was an ERROR!"
   end
-  if (a == b) || (b == c) || (a == c) || (b == c)
-	return :isosceles
-  else
-  	return :scalene
+end
+
+class Triangle
+  def initialize(side1, side2, side3)
+  @side1 = side1
+  @side2 = side2
+  @side3 = side3
+end
+
+def kind
+  if @side1 == 0 || @side2 == 0 || @side3 == 0
+    raise TriangleError
+  elsif @side1 < 0 || @side2 < 0 || @side3 < 0
+    raise TriangleError
+  elsif (@side1 + @side2) <= @side3 || (@side1 + @side3) <= @side2 || (@side3 + @side2) <= @side1
+    raise TriangleError
+  elsif @side1 == @side2 && @side2 == @side3
+    :equilateral
+  elsif @side2 == @side3 || @side1 == @side3 || @side1 == @side2
+    :isosceles
+  elsif @side1 != @side2 && @side2 != @side3 && @side1 != @side3
+    :scalene
   end
-
+end
 end
 
-# Error class used in part 2.  No need to change this code.
-class TriangleError < StandardError
-end
+## MORE ELEGENT
+
+# class TriangleError < StandardError
+#   def message
+#     "Action Bronson, No matter what, you're going to get a comparison to something. I Gave You A Grace Period, but that SportsNation triangular mentioning of my name was an ERROR!"
+#   end
+# end
+#
+# class Triangle
+#   attr_accessor :equilateral, :isosceles, :scalene  # => nil
+#
+#   def initialize(a, b, c)
+#     a, b, c = sides = [a, b, c].sort                       # => [3, 4, 4]
+#     raise TriangleError unless a > 0 and a + b > c         # => nil
+#     [:scalene, :isosceles, :equilateral][-sides.uniq.size]  # => :equilateral
+#   end
+#
+# end
+#
+# Triangle.new(4, 3, 4)  # => #<Triangle:0x007f8caa11ca90>
+
+## HINTS
+
+# The sum of the lengths of any two sides of a triangle
+# always exceeds the length of the third side.
+# This is a principle known as the triangle inequality.
+# Further, each side must be larger than 0.
